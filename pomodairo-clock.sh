@@ -3,12 +3,21 @@
 #     File Name           :     tomato_clock.sh
 #     Created By          :     geekerzp
 #     Creation Date       :     [2014-05-14 14:06]
-#     Last Modified       :     [2014-05-22 17:00]
+#     Last Modified       :     [2014-05-22 17:34]
 #     Description         :     自制番茄钟
 #######################################################################
 
+# If a link, fix the path
+TURE_PATH=$(readlink -f $0 | xargs dirname)
+cd $TURE_PATH
+
 # setting back ground sound
-SOUND=$1
+if [ ! -z $1 ]; then
+    SOUND=$1
+else
+    SOUND=Fire
+fi
+
 case $SOUND in
     Fire)
         SOUND_PATH="./assets/sounds/FireFinal15.mp3"
@@ -52,6 +61,7 @@ if [ ! -z $2 ] && [ $2 -gt 0 ] ; then
 fi
 
 # starting cmus as background
+pkill -9 cmus
 ./cmus.sh
 sleep 1s
 # clear playlist, library, play queue
@@ -66,9 +76,9 @@ COMMAND="pkill -9 cmus && env DISPLAY=:0 feh ./assets/pics/tomato.jpg"
 echo $COMMAND | at now+$TIME minutes
 
 # log
-echo "----------------------------------------------------------"
-echo "|               A pomodairo-clock                        |"
-echo "|                                                        |"
-echo "|               time: $TIME minutes                      |"
-echo "|               backsound: $SOUND                        |"
-echo "----------------------------------------------------------"
+echo "---------------------------------------------------------"
+echo "               A pomodairo-clock                        "
+echo "                                                        "
+echo "               time: $TIME minutes                      "
+echo "               backsound: $SOUND                        "
+echo "---------------------------------------------------------"
