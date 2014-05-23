@@ -3,7 +3,7 @@
 #     File Name           :     tomato_clock.sh
 #     Created By          :     geekerzp
 #     Creation Date       :     [2014-05-14 14:06]
-#     Last Modified       :     [2014-05-22 17:34]
+#     Last Modified       :     [2014-05-23 18:10]
 #     Description         :     自制番茄钟
 #######################################################################
 
@@ -67,9 +67,12 @@ sleep 1s
 # clear playlist, library, play queue
 cmus-remote -c && cmus-remote -c -l && cmus-remote -c -q
 # add sound to cmus
-cmus-remote -l $SOUND_PATH
+cmus-remote -q $SOUND_PATH
 # play background sound
-cmus-remote -p -R
+cmus-remote -p
+# repeat play
+sleep 1s
+cmus-remote -R
 
 # run
 COMMAND="pkill -9 cmus && env DISPLAY=:0 feh ./assets/pics/tomato.jpg"
