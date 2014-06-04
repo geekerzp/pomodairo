@@ -18,6 +18,7 @@ A variety of background music.
 * Train
 * Waves
 * WhiteNoise
+* Jackson
 
 Usage
 -----
